@@ -171,6 +171,20 @@ pub struct TypeAndId {
     id: SmolStr,
 }
 
+impl TypeAndId {
+    /// Retrieves the ID component of the entity ID.
+    /// If the entity is `User::"alice"`, this will return "alice".
+    pub fn id(&self) -> &SmolStr {
+        &self.id
+    }
+
+    /// Retrieves the type component of the entity ID.
+    /// If the entity is `User::"alice"`, this will return "User".
+    pub fn type_name(&self) -> &SmolStr {
+        &self.entity_type
+    }
+}
+
 impl From<EntityUID> for TypeAndId {
     fn from(euid: EntityUID) -> TypeAndId {
         let (entity_type, eid) = euid.components();
